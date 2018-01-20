@@ -9,14 +9,14 @@ var ObjectId = require('bson-objectid');
 
 module.exports = {
 	index: (req, res) => {
-		
+
 		Users.find()
 			
 			.then((response) => {
-				res.json(response);
+				return res.status(200).json({status:'success', body:{response}});
 			})
 			.catch((err) => {
-				res.status(500).json(err);
+				return res.status(500).json({status:'fail', message:err});
 			});
 	},
 
@@ -24,7 +24,9 @@ module.exports = {
 
 		validate = utilsUserService
 			.validateDataLogin(req.body.email, req.body.password);
-		if(!validate.status) res.status(401).json(validate.message);
+		
+		if(!validate.status) 
+			return res.status(401).json({status:'fail', 'message':validate.message});
 		
 		var password = md5(req.body.password);
 
@@ -33,20 +35,19 @@ module.exports = {
 			'password': password
 		}).then((response) => {
 	
-			if(response){
-				authService.generateUserToken(response, function (err, token) {
-	                if (err) return res.send(500).json(err);
-	                
-	                res.json(200, {token: token});
-	            });
+			if(!response)
+				return res.status(401).json({status:'fail', message:"User not found"});
 
-			} else{
-				res.status(401).json("User not found");
-			}
+			authService.generateUserToken(response, function (err, token) {
+                if(err) 
+                	return res.send(500).json({status:'fail', message:err});
+                
+                return res.status(200).json({status:'success', body:{token}});
+            });
 
 		})
 		.catch((err)=> {
-			res.status(500).json(err);
+			return res.status(500).json({status:'fail', message:err});
 		});
 	},
 
@@ -55,9 +56,8 @@ module.exports = {
 		
 		utilsUserService.validateData(user, function(status, message){
 
-			if(!status){
-				res.status(401).json(message);
-			}
+			if(!status)
+				return res.status(401).json({status:'fail', message:message});
 
 			Users.create({
 				name     : user.name,
@@ -66,9 +66,9 @@ module.exports = {
 				email    : user.email
 			
 			}).then((data) => {
-				res.status(201).json(data);
+				return res.status(201).json({status:'success', body:null});
 			}).catch((err) => {
-				res.status(401).json(err);
+				return res.status(401).json({status:'fail', message:err});
 			})
 
 		});

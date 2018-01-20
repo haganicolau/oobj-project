@@ -10,36 +10,34 @@ module.exports = {
 	index: (req, res) => {
 		/*verify if valid token*/
 		if(!authService.authenticateUserToken(req, res)) 
-			res.status(203).json('not allowed');
+			return res.status(203).json({status:'fail', message:'not allowed'});
 
 		Filiais.find({empresa : req.param('empresa')})
 			
 			.then((response) => {
-				res.json(response);
+				return res.status(200).json({status:'success', body:{response}});
 			})
 			.catch((err) => {
-				res.status(500).json(err);
+				return res.status(500).json({status:'fail', message:err});
 			});
 	},
 
 	create: (req, res) => {
 		/*verify if valid token*/
 		if(!authService.authenticateUserToken(req, res)) 
-			res.status(203).json('not allowed');
+			return res.status(203).json({status:'fail', message:'not allowed'});
 
 		let data = req.body;
 
 		utilsFiliaisService.validateData(data, function(status, message){
 
-			if(!status){
-				res.status(401).json(message);
-			}
+			if(!status)
+				return res.status(401).json({status:'fail', message:message});
 
 			Empresas.findById(data.empresa, function(err, response){
 
-				if(err){
-					res.status(401).json('Empresa not found');
-				}
+				if(err)
+					return res.status(401).json({status:'fail', message:'Empresa not found'});
 
 				Filiais.create({
 					categoria : data.categoria,
@@ -50,9 +48,9 @@ module.exports = {
 					uf        : data.uf,
 					
 				}).then((data) => {
-					res.status(201).json(data);
+					return res.status(201).json({status:'success', body:null});
 				}).catch((err) => {
-					res.status(401).json(err);
+					return res.status(401).json({status:'fail', message:err});
 				})
 			});
 		});
@@ -61,7 +59,7 @@ module.exports = {
 	delete: (req, res) => {
 		/*verify if valid token*/
 		if(!authService.authenticateUserToken(req, res)) 
-			res.status(203).json('not allowed');
+			return res.status(203).json({status:'fail', message:'not allowed'});
 
 		let _id = req.param('_id');
 
@@ -69,10 +67,10 @@ module.exports = {
 		Filiais.update(_id, {'status': false})
 
 			.then((data)=>{
-				res.status(202).json('Filial deleted');
+				return res.status(202).json({status:'success', body:null});
 			})
 			.catch((err)=>{
-				res.status(401).json(err);
+				return res.status(401).json({status:'fail', message:err});
 			});
 
 	},
@@ -80,16 +78,15 @@ module.exports = {
 	update: (req, res) => {
 		/*verify if valid token*/
 		if(!authService.authenticateUserToken(req, res)) 
-			res.status(203).json('not allowed');
+			return res.status(203).json({status:'fail', message:'not allowed'});
 
 		let _id = req.param('_id');
 		let data = req.body;
 
 		utilsFiliaisService.validateData(data, function(status, message){
 
-			if(!status){
-				res.status(401).json(message);
-			}
+			if(!status)
+				return res.status(401).json({status:'fail', message:message});
 
 			Filiais.update(_id, {
 				categoria : data.categoria,
@@ -102,10 +99,10 @@ module.exports = {
 			})
 
 			.then((data)=>{
-				res.status(202).json('empresa updated');
+				return res.status(202).json({status:'success', body:null});
 			})
 			.catch((err)=>{
-				res.status(401).json(err);
+				return res.status(401).json({status:'fail', messsage:err});
 			});
 
 		});
@@ -114,68 +111,59 @@ module.exports = {
 	search: (req, res) => {
 		/*verify if valid token*/
 		if(!authService.authenticateUserToken(req, res)) 
-			res.status(203).json('not allowed');
+			return res.status(203).json({status:'fail', message:'not allowed'});
 
 		let filter = req.param('filter').toString();
 		let value = req.param('value');
 		let where = {};
 
-		if(!filter){
-			res.status(401).json('filter is required');
-		}
+		if(!filter)
+			return res.status(401).json({status:'fail', message:'filter is required'});
 
-		if(!value){
-			res.status(401).json('value is required');
-		}
+		if(!value)
+			return res.status(401).json({status:fail, message:'value is required'});
 
-		if(filter == 'status'){
+		if(filter == 'status')
 			where = {'status' : value};
-		}
 
-		if(filter == 'cnpj'){
+		if(filter == 'cnpj')
 			where = {'cnpj' : value};
-		}
 
-		if(filter == 'uf'){
+		if(filter == 'uf')
 			where = {'uf' : value};
-		}
 
-		if(filter == 'municipio'){
+		if(filter == 'municipio')
 			where = {'municipio' : value};
-		}
 
-		if(filter == 'categoria'){
+		if(filter == 'categoria')
 			where = {'categoria' : value};
-		}
 
 		Filiais.find({
 			where
 		})
 			.then((response) => {
-				res.json(response);
+				return res.status(200).json({status:'success', body:{response}});
 			})
 			.catch((err) => {
-				res.status(500).json(err);
+				return res.status(500).json({status:'fail', message:err});
 			});
 	},
 
 	findOne: (req, res) => {
 		/*verify if valid token*/
-		if(!authService.authenticateUserToken(req, res)){
-			res.status(203).json('not allowed');
-		}
+		if(!authService.authenticateUserToken(req, res))
+			return res.status(203).json({status:'fail', message:'not allowed'});
 
-		if(!req.param('_id')){
-			res.status(401).json('_id is required');
-		}
+		if(!req.param('_id'))
+			return res.status(401).json({status:'fail', message:'_id is required'});
+
 
 		Filiais.findById(req.param('_id'), function(err, response){
 
-			if(err){
-				res.status(401).json(err);
-			}
+			if(err)
+				return res.status(401).json({status:'fail', message:err});
 
-			res.json(response);
+			return res.status(200).json({status:'success', body:{response}});
 		});
 			
 	}

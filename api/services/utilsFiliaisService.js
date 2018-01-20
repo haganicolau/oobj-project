@@ -60,33 +60,26 @@
 module.exports = {
  	validateData:function(body, done){
 
- 		if(!body.cnpj){
+ 		if(!body.cnpj)
  			return done(false, 'CNPJ is required!');
- 		}
 
- 		if(!body.status){
+ 		if(!body.status)
  			return done(false, 'Status is required!');
- 		}
 
- 		if(!body.municipio){
+ 		if(!body.municipio)
  			return done(false, 'Município is required!');
- 		}
 
- 		if(!body.uf){
+ 		if(!body.uf)
  			return done(false, 'UF is required!');
- 		}
 
- 		if(!body.categoria){
+ 		if(!body.categoria)
  			return done(false, 'Categoria is required!');
- 		}
 
- 		if(!body.empresa){
+ 		if(!body.empresa)
  			return done(false, 'empresa is required')
- 		}
 
- 		if(!validateCNPJ(body.cnpj)){
+ 		if(!validateCNPJ(body.cnpj))
  			return done(false, 'Invalid cnpj');
- 		}
 
  		return done(true, null);
  	}
