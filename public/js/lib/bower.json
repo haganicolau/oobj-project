@@ -1,0 +1,29 @@
+{
+  "name": "Teste OObj",
+  "description": "Aplciação Teste para seleção para vaga de emprego na OOBJ",
+  "main": "index.html",
+  "keywords": [
+    "oobj",
+    "seleção",
+    "empresa",
+    "filial"
+  ],
+  "authors": [
+    "Hagamenon Nicolau"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ladda": "^0.4.3",
+    "angular-moment": "^1.2.0",
+    "moment": "^2.20.1"
+  }
+}

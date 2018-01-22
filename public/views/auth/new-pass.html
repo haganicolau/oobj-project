@@ -1,0 +1,45 @@
+<section id="section-controller" ng-controller="RecoverController">
+	<div class="wrapper-page">
+		<div class=" card-box">
+			<div class="panel-heading">
+				<h3 class="text-center"> Recuperação de Senha </h3>
+			</div>
+
+			<div class="panel-body">
+				<form ng-submit="newPass()" role="form" class="text-center">
+					<div class="alert alert-info alert-dismissable">
+						<b>Informe uma nova Senha!</b>
+					</div>
+					<div class="form-group m-b-0">
+						<div class="input-group">
+							<div class="col-md-12">
+								
+								<div class="form-group">
+                                    <input id="pass1" type="password" ng-model="pass.pass1" placeholder="Senha" required class="form-control">
+
+                                    <input data-parsley-equalto="#pass1" ng-model="pass.pass2" type="password" required placeholder="Confirme Senha" class=" margin-top-10px form-control" id="passWord2">
+                                </div>
+								
+								<span class="input-group-btn">
+									<button ladda="loading" type="submit" class="margin-top-10px btn btn-pink w-sm waves-effect waves-light">
+										Resetar
+									</button> 
+								</span>
+							</div>
+
+							<div class="col-md-12 margin-top-10px">
+								<p ng-show="mensagem_fail.length" class="alert alert-danger alert-dismissable">
+									{{mensagem_fail}}
+								</p>
+								
+							</div>
+
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+		
+	</div>
+</section>

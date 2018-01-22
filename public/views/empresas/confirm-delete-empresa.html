@@ -1,0 +1,30 @@
+<button class="float-right btn btn-danger" ng-click="cancel()">
+    X
+</button>
+
+<div class="modal-header">
+    <h3>Excluir Empresa</h3>
+</div>
+
+<div class="modal-body" >
+
+    <h4>Confirme!</h4>
+    <div class="alert alert-danger">
+    	<p><strong>Você tem certeza que deseja excluir esta Empresa? Se houver alguma filial vinculado a esta empresa, serão todas excluídas.</strong></p>
+    </div>
+
+
+    <div class="row">
+            <div class="col-md-12 text-center margin-top-10">
+                  <p ng-show="mensagem_error.length" class="alert alert-danger">{{mensagem_error}}</p>
+                  <p ng-show="mensagem_success.length" class="alert alert-success">{{mensagem_success}}</p>
+            </div>
+        </div>
+
+    <div class="modal-footer">
+        <form name="empresa.empresaDeleteForm" ng-submit="confirmRemoveEmpresa(id)" novalidate>
+            <button ladda="loading" type="submit" class="btn btn-primary waves-effect waves-light" >Confirmar</button>
+            <button class="btn btn-warning waves-effect waves-light" ng-click="cancel()">Cancelar</button>       
+        </form>
+     </div>
+</div>

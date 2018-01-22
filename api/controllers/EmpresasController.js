@@ -53,18 +53,26 @@ module.exports = {
 		if(!authService.authenticateUserToken(req, res)) 
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
-		let _id = req.param('_id');
+		let _id = req.param('id');
 
-		/*Exclusão lógica*/
-		Empresas.update(_id, {'status': false})
-
-			.then((data)=>{
-				return res.status(202).json({status:'success', body:null});
-			})
-			.catch((err)=>{
+		/*Exclusão de todas as filiais*/
+		Filiais.destroy({
+			empresa: _id
+		}).exec(function(err) {
+			if(err)
 				return res.status(401).json({status:'fail', message:err});
-			});
 
+					/*Exclusão Empresas*/
+					Empresas.destroy({
+						id: _id
+					
+					}).exec(function(err) {
+						if(err)
+							return res.status(401).json({status:'fail', message:err});
+
+						return res.status(202).json({status:'success', body:null});
+					});
+		});
 	},
 
 	update: (req, res) => {
@@ -72,7 +80,7 @@ module.exports = {
 		if(!authService.authenticateUserToken(req, res)) 
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
-		let _id = req.param('_id');
+		let _id = req.param('id');
 		let data = req.body;
 
 		utilsEmpresasService.validateData(data, function(status, message){
@@ -139,7 +147,7 @@ module.exports = {
 		if(!authService.authenticateUserToken(req, res))
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
-		if(!req.param('_id'))
+		if(!req.param('id'))
 			return res.status(401).json({status:'fail', message:'_id is required'});
 
 		Empresas.findById(req.param('_id'), function(err, response){

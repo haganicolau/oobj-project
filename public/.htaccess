@@ -1,0 +1,24 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # remove slash do final de todas as urls
+    # RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # pastas bloqueadas
+    RewriteRule ^(app|sessions|logs)/(.*)$ - [F]
+
+    # arquivos bloqueados
+    RewriteRule /?(README\.md|composer\.json-dist|composer\.json|package\.xml)$ - [F]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    RewriteRule ^(.*)$ index.php [QSA,L]
+    
+    # bloquea indexamento de pastas
+    Options -Indexes
+</IfModule>
+
+<FilesMatch "\.(txt|html|htm|php)">
+    php_value output_handler ob_gzhandler
+</FilesMatch>

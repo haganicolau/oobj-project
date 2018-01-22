@@ -61,7 +61,7 @@ module.exports = {
 		if(!authService.authenticateUserToken(req, res)) 
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
-		let _id = req.param('_id');
+		let _id = req.param('id');
 
 		/*Exclusão lógica*/
 		Filiais.update(_id, {'status': false})
@@ -80,7 +80,7 @@ module.exports = {
 		if(!authService.authenticateUserToken(req, res)) 
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
-		let _id = req.param('_id');
+		let _id = req.param('id');
 		let data = req.body;
 
 		utilsFiliaisService.validateData(data, function(status, message){
@@ -154,7 +154,7 @@ module.exports = {
 		if(!authService.authenticateUserToken(req, res))
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
-		if(!req.param('_id'))
+		if(!req.param('id'))
 			return res.status(401).json({status:'fail', message:'_id is required'});
 
 

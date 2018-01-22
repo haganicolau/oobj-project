@@ -34,21 +34,21 @@ module.exports.routes = {
   /*
   *User routes
   */
-  '/': {
+  '/api/v1': {
     view: 'homepage'
   },
 
-  'POST /login' : {
+  'POST /api/v1/login' : {
     controller: "UsersController", 
     action: "login"
   },
 
-  'GET /users' : {
+  'GET /api/v1/users' : {
     controller: "UsersController", 
     action: "index"
   },
 
-  'POST /users' : {
+  'POST /api/v1/users' : {
     controller: "UsersController", 
     action: "create"
   },
@@ -57,32 +57,32 @@ module.exports.routes = {
   *Empresa routes
   */
 
-  'GET /empresas' : {
+  'GET /api/v1/empresas' : {
     controller: "EmpresasController", 
     action: "index"
   },
 
-  'POST /empresas' : {
+  'POST /api/v1/empresas' : {
     controller: "EmpresasController", 
     action: "create"
   },
 
-  'DELETE /empresas' : {
+  'DELETE /api/v1/empresas' : {
     controller: "EmpresasController", 
     action: "delete"
   },
 
-  'PUT /empresas' : {
+  'PUT /api/v1/empresas' : {
     controller: "EmpresasController", 
     action: "update"
   },
 
-  'GET /empresas/filter' : {
+  'GET /api/v1/empresas/filter' : {
     controller: "EmpresasController", 
     action: "search"
   },
 
-  'GET /empresas/findOne' :{
+  'GET /api/v1/empresas/findOne' :{
     controller: "EmpresasController", 
     action: "findOne"
   },
@@ -91,27 +91,27 @@ module.exports.routes = {
   *filiais routes
   */
 
-  'GET /filiais' : {
+  'GET /api/v1/filiais' : {
     controller: "FiliaisController", 
     action: "index"
   },
 
-  'POST /filiais' : {
+  'POST /api/v1/filiais' : {
     controller: "FiliaisController", 
     action: "create"
   },
 
-  'PUT /filiais' : {
+  'PUT /api/v1/filiais' : {
     controller: "FiliaisController", 
     action: "update"
   },
 
-  'DELETE /filiais' : {
+  'DELETE /api/v1/filiais' : {
     controller: "FiliaisController", 
     action: "delete"
   },
 
-  'GET /filiais/findOne' :{
+  'GET /api/v1/filiais/findOne' :{
     controller: "FiliaisController", 
     action: "findOne"
   }

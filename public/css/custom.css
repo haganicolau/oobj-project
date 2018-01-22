@@ -1,0 +1,83 @@
+.margin-bottom-10px{
+  margin-bottom: 10 px;
+}
+
+.margin-top-10px{
+  margin-top: 10px;
+}
+
+#topnav .topbar-main .logo{
+	margin-top: 0px !important;
+}
+
+#topnav .topbar-main .logo img{
+    margin-top: 11px;
+}
+
+#topnav .topbar-main .settings-topbar .icon-setting{
+	font-size: 2.5em !important;
+    position: relative;
+    top: 7px;
+}
+
+.cursor-pointer{
+	cursor: pointer;
+}
+
+.alert-info{
+	color: #31708f !important;
+}
+
+#topnav{
+	position: relative !important;
+}
+
+.padding-top-10{
+	padding-top:  10px !important;
+}
+
+.margin-top-10{
+	margin-top: 10px !important;
+}
+
+.margin-bottom-10{
+	margin-bottom: 10px !important;
+}
+
+.margin-right-5{
+	margin-right: 5px !important;
+}
+
+.inline-block{
+	display: inline-block !important;
+}
+
+.padding-left{
+	padding-left: 10px !important;
+}
+
+.margin-left-5{
+	margin-left: 5px;
+}
+
+.margin-right-5{
+	margin-right: 5px;
+}
+
+#filtro-empresas{
+    border: solid 1px #c6c6c6;
+    border-radius: 15px;
+}
+
+#filtro-empresas h2{
+    font-size: 1.7em;
+}
+
+.buttons-actions{
+    float: right;
+    margin-bottom: 15px;
+}
+
+.float-right{
+	float: right;
+}

@@ -1,0 +1,44 @@
+<section id="section-controller" ng-controller="RecoverController">
+	<div class="wrapper-page">
+		<div class=" card-box">
+			<div class="panel-heading">
+				<h3 class="text-center"> Recuperação de Senha </h3>
+			</div>
+
+			<div class="panel-body">
+				<form ng-submit="startRecover()" role="form" class="text-center">
+					<div class="alert alert-info alert-dismissable">
+						Informe seu <b>Email</b> e siga as instruções que serão enviadas para sua caixa de entrada!
+					</div>
+					<div class="form-group m-b-0">
+						<div class="input-group">
+							<div class="col-md-12">
+								<input type="email" class="form-control" placeholder="Email" ng-model="usuario.email" required="">
+								
+								<span class="input-group-btn">
+									<button ladda="loading" type="submit" class="margin-top-10px btn btn-pink w-sm waves-effect waves-light">
+										Resetar
+									</button> 
+								</span>
+							</div>
+
+							<div class="col-md-12 margin-top-10px">
+								<p ng-show="mensagem_fail.length" class="alert alert-danger alert-dismissable">
+									{{mensagem_fail}}
+								</p>
+
+								<p ng-show="mensagem_success.length" class="alert alert-success alert-dismissable">
+									{{mensagem_success}}
+								</p>
+								
+							</div>
+
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+		
+	</div>
+</section>
