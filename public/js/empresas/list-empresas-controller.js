@@ -28,9 +28,12 @@ angular.module('oobjclient')
 	        $scope.reverse = !$scope.reverse;
 	    };
 
-     	$scope.onSelectChange = function(){
-
-     	};
+        $scope.$on('update_list_relatorio', function(event, mass) { 
+            mass.forEach(function(value){
+            	$scope.empresas.push(value);
+            });
+            console.log($scope.empresas); 
+        });
 
         $scope.$on('update_list_empresa', function(event, mass) { 
             $scope.empresas.push(mass); 

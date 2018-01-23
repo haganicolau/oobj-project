@@ -137,8 +137,8 @@ var ModalInstanceUpload = function ($window, $scope, $http, $modalInstance, uplo
 
 				$scope.statusFile='Sistema Atualizado com sucesso!';
 				$scope.typeStatus='success';
-				$window.location.href = '/#/empresas';  
 				$scope.loading=false;
+				$scope.$emit('update_list_relatorio', json.empresas.empresa);
 
 			}).catch(function(erro){
 
