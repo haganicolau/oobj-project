@@ -30,7 +30,6 @@ module.exports = {
 		let data = req.body;
 
 		utilsFiliaisService.validateData(data, function(status, message){
-
 			if(!status)
 				return res.status(401).json({status:'fail', message:message});
 
@@ -48,7 +47,7 @@ module.exports = {
 					uf        : data.uf,
 					
 				}).then((data) => {
-					return res.status(201).json({status:'success', body:null});
+					return res.status(201).json({status:'success', body:{data}});
 				}).catch((err) => {
 					return res.status(401).json({status:'fail', message:err});
 				})
@@ -64,14 +63,25 @@ module.exports = {
 		let _id = req.param('id');
 
 		/*Exclusão lógica*/
-		Filiais.update(_id, {'status': false})
+		// Filiais.update(_id, {'status': false})
 
-			.then((data)=>{
-				return res.status(202).json({status:'success', body:null});
-			})
-			.catch((err)=>{
+		// 	.then((data)=>{
+		// 		return res.status(202).json({status:'success', body:null});
+		// 	})
+		// 	.catch((err)=>{
+		// 		return res.status(401).json({status:'fail', message:err});
+		// 	});
+
+		/*Exclusão Empresas*/
+		Filiais.destroy({
+			id: _id
+		
+		}).exec(function(err) {
+			if(err)
 				return res.status(401).json({status:'fail', message:err});
-			});
+
+			return res.status(202).json({status:'success', body:null});
+		});
 
 	},
 

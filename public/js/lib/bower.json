@@ -24,6 +24,7 @@
   "dependencies": {
     "angular-ladda": "^0.4.3",
     "angular-moment": "^1.2.0",
-    "moment": "^2.20.1"
+    "moment": "^2.20.1",
+    "angular-x2js": "^0.2.0"
   }
 }

@@ -114,6 +114,15 @@ module.exports.routes = {
   'GET /api/v1/filiais/findOne' :{
     controller: "FiliaisController", 
     action: "findOne"
+  },
+
+  /*
+  *Relatórios routes
+  */
+
+  'GET /api/v1/relatorio/export' :{
+    controller: "RelatorioController", 
+    action: "export"
   }
 
 };

@@ -59,7 +59,7 @@ var ModalInstanceEditEmpresa = function ($scope, $http, $modalInstance, empresaF
             $http(req).then(function(data){
 
                 $scope.mensagem_success = "Alterações realizadas com sucesso";
-                console.log($scope.mensagem_success);
+
                 $scope.loading=false;
                 $scope.$emit('update_list_empresa', empresa);
             })

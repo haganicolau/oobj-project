@@ -4,7 +4,8 @@ angular.module('oobjclient',
 	'ngCookies', 
 	'ui.bootstrap', 
 	'angular-ladda', 
-	'angularMoment'
+	'angularMoment',
+	'cb.x2js'
 	]).config(function($routeProvider, $locationProvider){
 		$locationProvider.hashPrefix('');    
 	});

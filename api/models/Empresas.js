@@ -20,7 +20,7 @@ module.exports = {
     },
 
     status:{
-    	type: 'boolean',
+    	type: 'string',
     	required: true
     }
   }

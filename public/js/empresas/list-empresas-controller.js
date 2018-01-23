@@ -2,13 +2,12 @@ angular.module('oobjclient')
 	.controller('ListaEmpresasController', function($scope, $http, $cookies, urlDominio, $window){
 		
 		let url = urlDominio.getUrl();
-		$scope.mensagem='';
+		$scope.mensagem ='';
 		$scope.empresas = [];
 
 		let req = {
 			method: 'GET',
 			url: url.concat('/empresas'),
-			data: $scope.usuario,
 			headers:{
 				"Content-Type": "application/json",
 				"x-token": $cookies.get('x-token'),
@@ -18,10 +17,7 @@ angular.module('oobjclient')
 
 		$http(req).then(function(response){
 			$scope.empresas = response.data.body.response;
-			//console.log($scope.empresas);
-			if(!empresas){
-				$scope.mensagem='Nenhuma empresa cadastrada';
-			}
+			$scope.mensagem = '';
 				
 		}).catch(function(erro){
 			$scope.mensagem='Houve um erro ao carregar a lista, tente novamente!';
@@ -31,6 +27,10 @@ angular.module('oobjclient')
 	        $scope.sortKey = keyname;
 	        $scope.reverse = !$scope.reverse;
 	    };
+
+     	$scope.onSelectChange = function(){
+
+     	};
 
         $scope.$on('update_list_empresa', function(event, mass) { 
             $scope.empresas.push(mass); 
@@ -49,6 +49,10 @@ angular.module('oobjclient')
             	if(item.id === mass){
             		$scope.empresas.splice(index, 1);
             	}
+
+            	if($scope.empresas.length < 1){
+					$scope.mensagem='Nenhuma empresa cadastrada';
+				}
             }) 
         });
 });

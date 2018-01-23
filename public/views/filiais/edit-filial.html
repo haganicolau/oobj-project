@@ -1,0 +1,68 @@
+<button class="float-right btn btn-danger" ng-click="cancel()">
+    X
+</button>
+<div class="modal-header">
+    <h3>Cadastro Empresa</h3>
+</div>
+<form name="filial.filialForm" ng-submit="submitFormEditFilial()" novalidate>
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>CNPJ</label>
+                    <input cnpj-dir type="text" name="cnpj" ng-model="filial.cnpj" class="form-control" required placeholder="99.999.999/9999-99">
+                    <input type="hidden" ng-model="filial.empresa" value="{{filial.empresa}}" />
+                    <input type="hidden" name="id" value="{{filial.id}}" ng-model="filial.id" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>UF</label>
+                    <input type="text" name="uf" ng-model="filial.uf" class="form-control" required >
+
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label>Município</label>
+                    <input type="text" name="municipio" ng-model="filial.municipio" class="form-control" required >
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Status</label>
+                <select name="status" ng-model="filial.status" class="form-control selectpicker">
+                    <option value="">Selecione</option>
+                    <option value="Ativo">Ativo</option>
+                    <option value="Inativo">Inativo</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label>Categoria</label>
+                <select name="categoria" ng-model="filial.categoria" class="form-control selectpicker">
+                    <option value="">Selecione</option>
+                    <option value="Matriz">Matriz</option>
+                    <option value="Filial">Filial</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center margin-top-10">
+                  <p ng-show="mensagem_error.length" class="alert alert-danger">{{mensagem_error}}</p>
+                  <p ng-show="mensagem_success.length" class="alert alert-success">{{mensagem_success}}</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button ladda="loading" type="submit" class="btn btn-primary waves-effect waves-light" >Confirmar</button>
+
+        <button class="btn btn-warning waves-effect waves-light" ng-click="cancel()">Cancelar</button>
+    </div>
+</form>

@@ -150,11 +150,12 @@ module.exports = {
 		if(!req.param('id'))
 			return res.status(401).json({status:'fail', message:'_id is required'});
 
-		Empresas.findById(req.param('_id'), function(err, response){
+		Empresas.findById(req.param('id'), function(err, response){
 
 			if(err)
 				return res.status(401).json({status:'fail', message:err});
-
+			
+			response = response[0];
 			res.status(200).json({status:'success', body:{response}});
 		});
 			

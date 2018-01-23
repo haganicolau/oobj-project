@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <base href="/" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Plataforma web para atendimento de concessionárias de veículos">
+        <meta name="description" content="Solução para apoiar a gestão empresarial dos clientes. Especificamente, a parte de gerenciamento de empresas e de filiais">
         <meta name="author" content="Hagamenon Nicolau <haganicolau@gmail.com>">
 
          <title>OOBJ Client - Login</title>
@@ -23,14 +23,21 @@
         <script src="js/empresas/edit-empresas-controller.js"></script>
         <script src="js/empresas/delete-empresas-controller.js"></script>
         <script src="js/empresas/empresas-routes.js"></script>
-        <script src="js/empresas/lista-empresas-controller.js"></script>
+        <script src="js/empresas/list-empresas-controller.js"></script>
         
+        <!-- Módulo Filiais --> 
+        <script src="js/filiais/add-filiais-controller.js"></script>
+        <script src="js/filiais/edit-filiais-controller.js"></script>
+        <script src="js/filiais/delete-filiais-controller.js"></script>
+        <script src="js/filiais/list-filiais-controller.js"></script>
+        <script src="js/filiais/filiais-routes.js"></script>
+
+        <!-- Módulo Relatorio -->
+        <script src="js/relatorio/relatorio-controller.js"></script>
+        <!-- <script src="js/filiais/filiais-routes.js"></script> -->
+
         <!-- Módulo Profile -->
         <script src="js/profile/profile-controller.js"></script>
-
-        <!-- Módulo pipe -->
-
-        <!-- Módulo people -->
         
         <!-- Módulo auth -->
         <script src="js/auth/login-controller.js"></script>
@@ -93,5 +100,9 @@
         <script src="js/lib/bower_components/moment/moment.js"></script>
         <script src="js/lib/bower_components/angular-moment/angular-moment.js"></script>
         <script src="js/lib/bower_components/moment/locale/pt-br.js"></script>
+
+        <!-- angular x2js-->
+        <script src="js/lib/bower_components/x2js/xml2json.js"></script>
+        <script src="js/lib/bower_components/angular-x2js/src/x2js.js"></script>
 
 </html>
