@@ -5,7 +5,9 @@ angular.module('oobjclient',
 	'ui.bootstrap', 
 	'angular-ladda', 
 	'angularMoment',
-	'cb.x2js'
+	'cb.x2js',
+	'ur.file',
+	'ngResource'
 	]).config(function($routeProvider, $locationProvider){
 		$locationProvider.hashPrefix('');    
 	});

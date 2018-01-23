@@ -123,6 +123,11 @@ module.exports.routes = {
   'GET /api/v1/relatorio/export' :{
     controller: "RelatorioController", 
     action: "export"
+  },
+
+  'POST /api/v1/relatorio/import' :{
+    controller: "RelatorioController", 
+    action: "import"
   }
 
 };

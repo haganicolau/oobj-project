@@ -35,9 +35,10 @@
 			<section class='col-sm-8'>
 
 				<div class="buttons-actions">
-					<button  type="button" class="btn btn-primary" data-toggle="tooltip" title="Importar Dados">
+					<button ng-controller="RelatorioController" type="button" class="btn btn-primary" ng-click="showFormUpload()" data-toggle="tooltip" title="Importar Dados">
 						<i class="fa fa-upload" aria-hidden="true"></i>
 					</button>
+
 					<button ladda="loading" ng-controller="RelatorioController" ng-click="export()" type="button" class="btn btn-primary" data-toggle="tooltip" title="Exportar Dados">
 						<i class="fa fa-download" aria-hidden="true"></i>
 					</button>
