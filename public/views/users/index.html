@@ -1,0 +1,57 @@
+<header id="topnav">
+	<div ng-include="'/views/common/topbar.html'"></div>
+</header>
+	<div class="container">
+		<h1>Usuários</h1>
+
+		<div class="row">
+			<section id="filtro-empresas" class='col-sm-3'>
+				<div  class="">
+					<h2>Filtros</h2>
+				</div>
+
+				<div>
+					<div class="form-group">
+                   		<label>Nome</label>
+                    	<input data-ng-model="searchName.name" type="text" name="name" class="form-control" placeholder="Nome">
+                	</div>
+
+                	<div class="form-group">
+                   		<label>email</label>
+                    	<input data-ng-model="searchEmail.email" type="text" name="email" class="form-control" placeholder="email@email.com">
+                	</div>
+				</div>
+			</section>
+
+			<section class='col-sm-8'>
+
+				<div class="buttons-actions">
+					
+					<button type="button" ng-controller="AddUsersController" class="btn btn-primary" data-toggle="tooltip" title="Cadastrar Novo Usuário" ng-click="showFormAdd()">
+						<i class="fa fa-plus" aria-hidden="true"></i>
+					</button>
+				</div>
+				
+				<table class="table table-striped table-bordered" width="100%">
+				  <thead>
+				    <tr>
+				      <th>Nome</th>
+				      <th>E-mail</th>
+				      <th>Data Cadastro</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr ng-repeat="user in users | filter:searchName | filter:searchEmail ">
+				      <td>{{user.name}}</td>
+				      <td>{{user.email}}</td>
+				      <td>{{user.createdAt}}</td>
+				    </tr>
+				  </tbody>
+				</table>
+				
+				<p ng-show="mensagem.length" class="alert alert-danger">{{mensagem}}</p>
+
+			</section>
+		</div>
+		
+	</div>

@@ -93,3 +93,10 @@
 .color-f05050{
 	color: #f05050 !important;
 }
+
+.regras-uso{
+	border: solid 1px #c6c6c6;
+    border-radius: 16px;
+    max-width: 646px;
+    margin-top: 10px;
+}
