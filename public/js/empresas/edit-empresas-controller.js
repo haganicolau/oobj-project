@@ -61,7 +61,9 @@ var ModalInstanceEditEmpresa = function ($scope, $http, $modalInstance, empresaF
                 $scope.mensagem_success = "Alterações realizadas com sucesso";
 
                 $scope.loading=false;
+                $modalInstance.close('cancel');
                 $scope.$emit('update_list_empresa', empresa);
+
             })
             .catch(function(erro){
                 $scope.loading=false;

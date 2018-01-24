@@ -3,7 +3,6 @@ angular.module('oobjclient')
 
         $scope.$on('modalEditFilial', function(event, mass) { 
             $scope.filial = mass;
-            console.log($scope.filial);
             
             var modalInstance = $modal.open({
                 templateUrl: '/views/filiais/edit-filial.html',
@@ -77,8 +76,9 @@ var ModalInstanceEditFilial = function ($scope, $http, $modalInstance, validateC
             $http(req).then(function(data){
 
                 $scope.mensagem_success = "Alterações realizadas com sucesso";
-                console.log($scope.mensagem_success);
+
                 $scope.loading=false;
+                $modalInstance.close('cancel');
                 $scope.$emit('update_list_empresa', empresa);
             })
             .catch(function(erro){

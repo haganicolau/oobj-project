@@ -57,11 +57,11 @@ var ModalInstanceEmpresa = function ($scope, $http, $modalInstance, empresaForm,
 					"x-token-issued" : $cookies.get('x-token-issued')
                 }
             };
-
             $http(req).then(function(data){
             	empresa = data.data.body.data;
                 $scope.mensagem_success = "Cadastro realizado com sucesso";
                 $scope.loading=false;
+                $scope.empresa = {};
                 $scope.$emit('update_list_empresa', empresa);
             })
             .catch(function(erro){

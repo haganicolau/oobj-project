@@ -48,6 +48,7 @@ angular.module('oobjclient')
         });   
 
         $scope.$on('update_list_filial', function(event, mass) { 
+            $scope.empresa.cadastro_completo = true;
             $scope.filiais.push(mass); 
         });
 

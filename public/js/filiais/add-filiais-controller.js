@@ -77,10 +77,10 @@ var ModalInstanceFilial = function ($scope, $http, $modalInstance, filialForm, v
             };
 
             $http(req).then(function(data){
-                filialForm = {};
-            	empresa = data.data.body.data;
+            	empresa = data.data.body.filial;
                 $scope.mensagem_success = "Cadastro realizado com sucesso";
                 $scope.loading = false;
+                $scope.filial = {};
                 $scope.$emit('update_list_filial', empresa);
             })
             .catch(function(erro){

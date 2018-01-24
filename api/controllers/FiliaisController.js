@@ -46,8 +46,16 @@ module.exports = {
 					cnpj      : data.cnpj,
 					uf        : data.uf,
 					
-				}).then((data) => {
-					return res.status(201).json({status:'success', body:{data}});
+				}).then((filial) => {
+
+					/*Atualizando Empresa para cadastro concluído com sucesso*/
+					Empresas.update(response[0].id, {
+						cadastro_completo : true
+					})
+					.then((empresa)=>{
+						return res.status(201).json({status:'success', body:{filial}});
+					});
+
 				}).catch((err) => {
 					return res.status(401).json({status:'fail', message:err});
 				})
@@ -62,15 +70,6 @@ module.exports = {
 
 		let _id = req.param('id');
 
-		/*Exclusão lógica*/
-		// Filiais.update(_id, {'status': false})
-
-		// 	.then((data)=>{
-		// 		return res.status(202).json({status:'success', body:null});
-		// 	})
-		// 	.catch((err)=>{
-		// 		return res.status(401).json({status:'fail', message:err});
-		// 	});
 
 		/*Exclusão Empresas*/
 		Filiais.destroy({
@@ -118,47 +117,6 @@ module.exports = {
 		});
 	},
 
-	search: (req, res) => {
-		/*verify if valid token*/
-		if(!authService.authenticateUserToken(req, res)) 
-			return res.status(203).json({status:'fail', message:'not allowed'});
-
-		let filter = req.param('filter').toString();
-		let value = req.param('value');
-		let where = {};
-
-		if(!filter)
-			return res.status(401).json({status:'fail', message:'filter is required'});
-
-		if(!value)
-			return res.status(401).json({status:fail, message:'value is required'});
-
-		if(filter == 'status')
-			where = {'status' : value};
-
-		if(filter == 'cnpj')
-			where = {'cnpj' : value};
-
-		if(filter == 'uf')
-			where = {'uf' : value};
-
-		if(filter == 'municipio')
-			where = {'municipio' : value};
-
-		if(filter == 'categoria')
-			where = {'categoria' : value};
-
-		Filiais.find({
-			where
-		})
-			.then((response) => {
-				return res.status(200).json({status:'success', body:{response}});
-			})
-			.catch((err) => {
-				return res.status(500).json({status:'fail', message:err});
-			});
-	},
-
 	findOne: (req, res) => {
 		/*verify if valid token*/
 		if(!authService.authenticateUserToken(req, res))
@@ -176,6 +134,12 @@ module.exports = {
 			return res.status(200).json({status:'success', body:{response}});
 		});
 			
+	},
+
+	countFiliais: (Empresas) => {
+		
 	}
 };
+
+
 

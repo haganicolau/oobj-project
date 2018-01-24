@@ -34,4 +34,10 @@ angular.module('oobjclient')
 			}
 		});
 	};
-})
+
+	$scope.logout = function(){
+		$cookies.remove('x-token');
+		$cookies.remove('x-token-issued');
+		$window.location.href = '/#/login';
+	}
+});

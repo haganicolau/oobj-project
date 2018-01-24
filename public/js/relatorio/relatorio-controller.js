@@ -27,7 +27,7 @@ angular.module('oobjclient')
                 xmlAsStr = '<empresas>' + xmlAsStr + '</empresas>';
 				xmlAsStr = "<?xml version='1.0' encoding='UTF-8'?>" + xmlAsStr;
 
-				var filename = 'filename.xml';   
+				var filename = 'report.xml';   
         		var blob = new Blob([xmlAsStr], {type: 'text/xml'});
         		var e = document.createEvent('MouseEvents'),
         		a = document.createElement('a');
@@ -42,35 +42,6 @@ angular.module('oobjclient')
 				$scope.mensagem_error='Houve um erro ao tentar gerar o relatorio!';
 			});
 		};
-
-		// $scope.showContent = function($fileContent){
-
-		// 	var json = [];
-
-		// 	let x2js = new X2JS();
-		// 	json = x2js.xml_str2json($fileContent);
-		// 	console.log(json);
-
-		// 	let req = {
-		// 		method: 'POST',
-		// 		url: url.concat('/relatorio/import'),
-		// 		data: json,
-		// 		headers:{
-		// 			"Content-Type": "application/json",
-		// 			"x-token": $cookies.get('x-token'),
-		// 			"x-token-issued" : $cookies.get('x-token-issued')
-		// 		}
-		// 	}	
-
-		// 	$http(req).then(function(response){
-
-		// 		console.log(response);
-
-		// 	}).catch(function(erro){
-		// 		$scope.mensagem_error='Houve um erro ao tentar gerar o relatorio!';
-		// 	});
-		// };
-
 
 		$scope.showFormUpload = function(){
 			var modalInstance = $modal.open({

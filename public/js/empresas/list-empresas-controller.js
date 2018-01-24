@@ -32,7 +32,7 @@ angular.module('oobjclient')
             mass.forEach(function(value){
             	$scope.empresas.push(value);
             });
-            console.log($scope.empresas); 
+
         });
 
         $scope.$on('update_list_empresa', function(event, mass) { 

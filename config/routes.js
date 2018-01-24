@@ -77,11 +77,6 @@ module.exports.routes = {
     action: "update"
   },
 
-  'GET /api/v1/empresas/filter' : {
-    controller: "EmpresasController", 
-    action: "search"
-  },
-
   'GET /api/v1/empresas/findOne' :{
     controller: "EmpresasController", 
     action: "findOne"

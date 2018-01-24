@@ -63,7 +63,12 @@
 				      <td>{{empresa.razao_social}}</td>
 				      <td>{{empresa.cnpj_base}}</td>
 				      <td>{{empresa.status}}</td>
-				      <td>Cadastro Completo</td>
+				      <td>
+				      	<p ng-show="empresa.cadastro_completo"> Cadastro Completo </p>
+				      	<p ng-show="!empresa.cadastro_completo" class="color-f05050">
+				      	 	<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Cadastro Incompleto 
+				      	</p>
+				      </td>
 				      <td>
 				      	<div class="row">
 				      		<a href="/#/filiais/{{empresa.id}}" data-toggle="tooltip" title="Detalhes e Filiais">

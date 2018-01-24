@@ -41,6 +41,7 @@ var ModalInstanceRemoveFilial = function ($scope, $http, $modalInstance, filialD
             	$scope.mensagem_success='Excluído com sucesso!';
 
             	$scope.$emit('remove_list_filial', id);
+                $modalInstance.close('cancel');
             })
             .catch(function(erro){
                 $scope.loading=false;

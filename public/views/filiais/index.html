@@ -5,9 +5,7 @@
 
 		<div class="row">
 
-			<h1>Razão Social: {{empresa.razao_social}}</h1>
-
-			<section id="filtro-empresas" class='col-sm-3'>
+			<section id="filtro-empresas" class='col-sm-3 margin-top-10'>
 				<div  class="">
 					<h2>Filtros</h2>
 				</div>
@@ -50,11 +48,26 @@
 
 			<section class='col-sm-8'>
 
-						<h3>CNPJ Base: {{empresa.cnpj_base}}</h3>
+				<h3>{{empresa.razao_social}}</h3>
 
-						<h4>Status: {{empresa.status}}</h4>
+				<h5>CNPJ Base: {{empresa.cnpj_base}}</h5>
+
+				<h6>Status: {{empresa.status}}</h6>
+
+				<h6 ng-show="empresa.cadastro_completo"> Cadastro Completo </h6>
+
+				<p ng-show="!empresa.cadastro_completo" class=" text-center color-f05050">
+					<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Cadastro Incompleto - Cadastre Filiais
+				</p>
 
 				<div class="buttons-actions">
+
+					<a href="/#/empresas">
+						<button type="button" class="btn btn-primary" data-toggle="tooltip" title="Voltar página de empresas">
+							<i class="fa fa-chevron-left" aria-hidden="true"></i>
+						</button>
+					</a>
+
 					<button ng-controller="AddFiliaisController" type="button" class="btn btn-primary" data-toggle="tooltip" title="Cadastrar Empresa" ng-click="showFormAdd(empresa.id)">
 						<i class="fa fa-plus" aria-hidden="true"></i>
 					</button>

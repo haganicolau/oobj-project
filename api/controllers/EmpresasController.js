@@ -35,9 +35,10 @@ module.exports = {
 				return res.status(401).json({status:'fail', message:message});
 
 			Empresas.create({
-				razao_social : data.razao_social,
-				cnpj_base    : data.cnpj_base,
-				status       : data.status,
+				razao_social 	  : data.razao_social,
+				cnpj_base    	  : data.cnpj_base,
+				status       	  : data.status,
+				cadastro_completo : false
 			
 			}).then((data) => {
 				return res.status(201).json({status:'success', body:{data}});
@@ -103,43 +104,6 @@ module.exports = {
 			});
 
 		});
-	},
-
-	search: (req, res) => {
-		/*verify if valid token*/
-		if(!authService.authenticateUserToken(req, res)) 
-			return res.status(203).json({status:'fail', message:'not allowed'});
-
-		let filter = req.param('filter').toString();
-		let value = req.param('value');
-		let where = {};
-
-		if(!filter)
-			return res.status(401).json({status:'fail', message:'filter is required'});
-
-		if(!value)
-			return res.status(401).json({status:fail, message:'value is required'});
-
-		if(filter == 'status')
-			where = {'status' : value};
-
-		if(filter == 'cnpj_base')
-			where = {'cnpj_base' : value};
-
-		if(filter == 'razao_social')
-			where = {'razao_social' : '%'+value+'%'};
-
-		
-		Empresas.find({
-			where
-		})
-		.then((response) => {
-			return res.status(200).json({status:'success', body:{response}});
-		})
-		.catch((err) => {
-			return res.status(500).json({status:'fail', message:err});
-		});
-
 	},
 
 	findOne: (req, res) => {

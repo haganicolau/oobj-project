@@ -22,6 +22,11 @@ module.exports = {
     status:{
     	type: 'string',
     	required: true
+    },
+
+    cadastro_completo:{
+        type: 'boolean',
+        required: true
     }
   }
 };

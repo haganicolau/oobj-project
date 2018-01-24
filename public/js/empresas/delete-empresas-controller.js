@@ -38,8 +38,8 @@ var ModalInstanceRemoveEmpresa = function ($scope, $http, $modalInstance, empres
             $http(req).then(function(data){
             	$scope.loading=false;
             	$scope.mensagem_success='Excluído com sucesso!';
-
             	$scope.$emit('remove_list_empresa', id);
+                $modalInstance.close('cancel');
             })
             .catch(function(erro){
                 $scope.loading=false;
