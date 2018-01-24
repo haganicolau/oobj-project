@@ -86,7 +86,7 @@ var ModalInstanceFilial = function ($scope, $http, $modalInstance, filialForm, v
             .catch(function(erro){
 
                 $scope.loading = false;
-                $scope.mensagem_error = erro.data;
+                $scope.mensagem_error = erro.data.message;;
             })
         }
 

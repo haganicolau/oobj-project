@@ -53,6 +53,11 @@ module.exports.routes = {
     action: "create"
   },
 
+  'POST /api/v1/editPass' : {
+    controller: "UsersController", 
+    action: "editPass"
+  },
+
   /*
   *Empresa routes
   */

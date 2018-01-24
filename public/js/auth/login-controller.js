@@ -23,6 +23,7 @@ angular.module('oobjclient')
 		$http(req).then(function(response){
 			$cookies.put('x-token',response.data.body.token.token);
 			$cookies.put('x-token-issued',response.data.body.token.issued);
+			$cookies.put('x-user',response.data.body.user);
 			$window.location.href = '/#/empresas';
 				
 		}).catch(function(erro){

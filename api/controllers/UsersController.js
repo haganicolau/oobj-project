@@ -42,7 +42,7 @@ module.exports = {
                 if(err) 
                 	return res.send(500).json({status:'fail', message:err});
                 
-                return res.status(200).json({status:'success', body:{token}});
+                return res.status(200).json({status:'success', body:{token, user:response.id}});
             });
 
 		})
@@ -52,6 +52,11 @@ module.exports = {
 	},
 
 	create: (req, res) => {
+
+		if(!authService.authenticateUserToken(req, res)) 
+			return res.status(203).json({status:'fail', message:'not allowed'});
+
+
 		user = req.body;
 		
 		utilsUserService.validateData(user, function(status, message){
@@ -66,7 +71,7 @@ module.exports = {
 				email    : user.email
 			
 			}).then((data) => {
-				return res.status(201).json({status:'success', body:null});
+				return res.status(201).json({status:'success', body:{data}});
 			}).catch((err) => {
 				return res.status(401).json({status:'fail', message:err});
 			})
@@ -74,12 +79,36 @@ module.exports = {
 		});
 	},
 
-	destroy: (req, res) => {
-
+	sendEmail: (req, res) => {
+		return res.status(501).json({status:'fail', message:'Não finalizado'});
+		//sendEmailService.sendEmail();
 	},
 
-	edit: (req, res) => {
+	editPass: (req, res) => {
+		/*verify if valid token*/
+		if(!authService.authenticateUserToken(req, res)) 
+			return res.status(203).json({status:'fail', message:'not allowed'});
 
+		let _id = req.param('id');
+		let data = req.body;
+
+		utilsUserService.validateDataPass(data, function(status, message){
+
+			if(!status)
+				return res.status(401).json({status:'fail', message:message});
+
+			Users.update(_id, {
+				password : md5(req.body.password),
+			})
+
+			.then((data)=>{
+				return res.status(202).json({status:'success', body:null});
+			})
+			.catch((err)=>{
+				return res.status(401).json({status:'fail', message:err});
+			});
+
+		});
 	}, 
 
 	update: (req, res) => {

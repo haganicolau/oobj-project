@@ -62,5 +62,17 @@ module.exports = {
 			return {status:false, message:"Not authorized"};
 
 		return {status: true};
- 	}
+ 	},
+
+ 	validateDataPass:function(body, done){
+
+ 		if(!body.password || !body.confirm_password)
+ 			return done(false, 'Password and confirm password are required!');
+
+ 		if(body.password !== body.confirm_password)
+ 			return done(false, 'Password and confirm password must be equals');
+
+ 		return done(true, null);
+
+ 	},
 }

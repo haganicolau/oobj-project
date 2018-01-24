@@ -24,5 +24,7 @@ angular.module('oobjclient')
 			$scope.mensagem='Houve um erro ao carregar a lista, tente novamente!';
 		});
 
-
+        $scope.$on('update_list_user', function(event, mass) { 
+            $scope.users.push(mass); 
+        });
 });

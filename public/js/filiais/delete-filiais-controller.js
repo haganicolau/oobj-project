@@ -45,7 +45,7 @@ var ModalInstanceRemoveFilial = function ($scope, $http, $modalInstance, filialD
             })
             .catch(function(erro){
                 $scope.loading=false;
-                $scope.mensagem_error=erro.data;
+                $scope.mensagem_error=erro.data.message;;
             })
     };
 

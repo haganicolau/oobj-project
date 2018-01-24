@@ -1,46 +1,55 @@
 angular.module('oobjclient')
 	.controller('AddUsersController', function($scope, $modal, $http, $cookies, urlDominio, $window){
 
-		$scope.empresa = {};
-		$scope.id = 0;
+		$scope.user = {};
 
         /*chama o modal para cadastro de empresa*/
         $scope.showFormAdd = function(){
 
             var modalInstance = $modal.open({
                 templateUrl: '/views/users/new-user.html',
-                controller: ModalInstanceEmpresa,
+                controller: ModalInstanceUser,
                 scope: $scope,
                 resolve: {
-                    empresaForm: function () {
-                        return $scope.empresa={empresa: $scope.empresa};
+                    userForm: function () {
+                        return $scope.user={user: $scope.user};
                     }
                 }
             });
         };
 });
 
-var ModalInstanceEmpresa = function ($scope, $http, $modalInstance, empresaForm,urlDominio, $cookies) {
+var ModalInstanceUser = function ($scope, $http, $modalInstance, userForm,urlDominio, $cookies) {
     $scope.mensagem_success='';
 
-	$scope.submitFormSaveEmpresa = function(){
+	$scope.submitFormSaveUser = function(){
 		$scope.loading=true;
 		$scope.mensagem_error='';
 
 		var valid = true;
 
-		if(!empresaForm.razao_social){
-            $scope.mensagem_error='Informe Razão Social';
+		if(!userForm.name){
+            $scope.mensagem_error='Informe Nome';
             valid = false;
         }
 
-		if(!empresaForm.cnpj_base){
-            $scope.mensagem_error='Informe CNPJ BASE';
+        if(!userForm.email){
+            $scope.mensagem_error='Informe Email';
             valid = false;
         }
 
-        if(!empresaForm.status){
-        	$scope.mensagem_error='Selecione um status';
+		if(!userForm.password){
+            $scope.mensagem_error='Informe Password';
+            valid = false;
+        }
+
+        if(!userForm.confirm_password){
+        	$scope.mensagem_error='Confirme Passowrd';
+            valid = false;
+        }
+
+        if(userForm.password !== userForm.confirm_password){
+            $scope.mensagem_error='Password e Confirme Password devem ser iguais';
             valid = false;
         }
 
@@ -49,8 +58,8 @@ var ModalInstanceEmpresa = function ($scope, $http, $modalInstance, empresaForm,
 
         	var req = {
                 method: 'POST',
-                url: url.concat('/empresas'),
-                data: empresaForm,
+                url: url.concat('/users'),
+                data: userForm,
                 headers:{
                     "Content-Type": "application/json",
 					"x-token": $cookies.get('x-token'),
@@ -58,16 +67,19 @@ var ModalInstanceEmpresa = function ($scope, $http, $modalInstance, empresaForm,
                 }
             };
             $http(req).then(function(data){
-            	empresa = data.data.body.data;
+                console.log(data);
+            	user = data.data.body.data;
                 $scope.mensagem_success = "Cadastro realizado com sucesso";
                 $scope.loading=false;
-                $scope.empresa = {};
-                $scope.$emit('update_list_empresa', empresa);
+                $scope.user = {};
+                $scope.$emit('update_list_user', user);
             })
             .catch(function(erro){
                 $scope.loading=false;
-                $scope.mensagem_error=erro.data;
+                $scope.mensagem_error=erro.data.message;
             })
+        } else{
+            $scope.loading=false;
         }
 	}
 

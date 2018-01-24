@@ -83,7 +83,7 @@ var ModalInstanceEditFilial = function ($scope, $http, $modalInstance, validateC
             })
             .catch(function(erro){
                 $scope.loading=false;
-                $scope.mensagem_error=erro.data;
+                $scope.mensagem_error=erro.data.message;
             })
         }
     }

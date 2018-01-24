@@ -43,7 +43,7 @@ var ModalInstanceRemoveEmpresa = function ($scope, $http, $modalInstance, empres
             })
             .catch(function(erro){
                 $scope.loading=false;
-                $scope.mensagem_error=erro.data;
+                $scope.mensagem_error=erro.data.message;
             })
     };
 

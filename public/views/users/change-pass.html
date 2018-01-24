@@ -1,0 +1,46 @@
+<button class="float-right btn btn-danger" ng-click="cancel()">
+    X
+</button>
+<div class="modal-header">
+    <h3>Mudança de Senha</h3>
+</div>
+<form name="user.userForm" ng-submit="submitFormSaveUser()" novalidate>
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" name="email" ng-model="user.password" class="form-control" required placeholder="Senha">
+                </div>
+            </div>
+
+        <div class="col-md-12">
+                <div class="form-group">
+                    <label>Confirmar Senha</label>
+                    <input type="password" name="email" ng-model="user.confirm_password" class="form-control" required placeholder="Confirme Senha">
+                </div>
+            </div>
+        </div>
+
+<!--             <ul>
+                <li><p>Ao cadastrar o usuário, será enviado para o e-mail cadastrado os dados de acesso ao sistema.</p></li>
+            </ul> -->
+        </article> 
+        
+
+        <div class="row">
+            <div class="col-md-12 text-center margin-top-10">
+                  <p ng-show="mensagem_error.length" class="alert alert-danger">{{mensagem_error}}</p>
+                  <p ng-show="mensagem_success.length" class="alert alert-success">{{mensagem_success}}</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button ladda="loading" type="submit" class="btn btn-primary waves-effect waves-light" >Confirmar</button>
+
+        <button class="btn btn-warning waves-effect waves-light" ng-click="cancel()">Cancelar</button>
+    </div>
+</form>
