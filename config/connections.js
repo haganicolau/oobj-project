@@ -19,10 +19,7 @@
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.connections.html
  */
 
-const aws = require('aws-sdk');
-
 module.exports.connections = {
-
 
   /***************************************************************************
   *                                                                          *
@@ -59,20 +56,13 @@ module.exports.connections = {
   * Run: npm install sails-mongo@for-sails-0.12 --save                       *
   *                                                                          *
   ***************************************************************************/
-  let s3 = new aws.S3({
-    host: process.env.MONGO_HOST,
-    user: process.env.MONGO_USER,
-    pass: process.env.MONGO_PASS,
-    database: process.env.MONGO_DATABASE
-  });
-
   sailsMongo: {
       adapter: 'sails-mongo',
-      host: s3.host,
-      port: 43132,
-      user: s3.user, 
-      password: s3.pass, 
-      database: s3.database
+      host: {host},
+      port: {port},
+      user: {user}, 
+      password: {pass}, 
+      database: {database}
   },
 
   /***************************************************************************
