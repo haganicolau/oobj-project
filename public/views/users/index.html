@@ -1,7 +1,7 @@
 <header id="topnav">
 	<div ng-include="'/views/common/topbar.html'"></div>
 </header>
-	<div class="container">
+	<div class="container-fluid">
 		<h1>Usuários</h1>
 
 		<div class="row">
@@ -23,7 +23,7 @@
 				</div>
 			</section>
 
-			<section class='col-sm-8'>
+			<section class='col-sm-9'>
 
 				<div class="buttons-actions">
 					
@@ -38,13 +38,15 @@
 				      <th>Nome</th>
 				      <th>E-mail</th>
 				      <th>Data Cadastro</th>
+				      <th>Última Alteração</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				    <tr ng-repeat="user in users | filter:searchName | filter:searchEmail ">
 				      <td>{{user.name}}</td>
 				      <td>{{user.email}}</td>
-				      <td>{{user.createdAt}}</td>
+				      <td>{{user.createdAt | amDateFormat: "DD/mm/YYYY"}}</td>
+				      <td>{{user.updatedAt | amDateFormat: "DD/mm/YYYY"}}</td>
 				    </tr>
 				  </tbody>
 				</table>
