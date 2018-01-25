@@ -1,7 +1,8 @@
 /**
  * utilsEmpresasService
  *
- * @description :: 
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ * @description :: Valida os dados de Empresa
  */
 module.exports = {
  	validateData:function(body, done){

@@ -1,6 +1,10 @@
+/**
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ */
 angular.module('oobjclient')
 	.controller('LoginController', function($scope, $http, $cookies, urlDominio, $window){
 
+	/*objeto usuário para controle de login*/
 	$scope.usuario={
 		'email':'',
 		'password':''
@@ -8,6 +12,7 @@ angular.module('oobjclient')
 	
 	var url = urlDominio.getUrl();
 
+	/*Ação do click para logar*/
 	$scope.logar = function(){
 		$scope.loading=true;
 
@@ -20,12 +25,16 @@ angular.module('oobjclient')
 			}	
 		};
 
+		/* executa requisição a partir das configurações na variável req, se resposta 
+		 * válida, quer dizer que os dados de login estão corretos, insere o token e a 
+		 * data do token no header.*/
 		$http(req).then(function(response){
 			$cookies.put('x-token',response.data.body.token.token);
 			$cookies.put('x-token-issued',response.data.body.token.issued);
 			$cookies.put('x-user',response.data.body.user);
 			$window.location.href = '/#/empresas';
 				
+		/*Se os dados não forem válidos, apresentar mensagem de erro*/
 		}).catch(function(erro){
 			$scope.loading=false;
 			if(erro.status==401){
@@ -36,6 +45,7 @@ angular.module('oobjclient')
 		});
 	};
 
+	/*Ação do click para remover as credenciais de acesso e login*/
 	$scope.logout = function(){
 		$cookies.remove('x-token');
 		$cookies.remove('x-token-issued');

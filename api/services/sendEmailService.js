@@ -1,7 +1,11 @@
 /**
- * authService
+ * SendEmailService
  *
- * @description :: 
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ * @description :: Serviço de disparo de email usando a ferramenta nodemailer, 
+ * porém, por falta de um SMS, ou qualquer outro disparador de email, este método 
+ * não foi concluído, apesar de estar pronto, funcionando e testado com a ferramenta 
+ * mailtrap.
  */
 
 const nodemailer = require('nodemailer');

@@ -1,3 +1,8 @@
+/**
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ */
+
+/* rotas de usuários */
 angular.module('oobjclient')
 	.config(function($routeProvider){
 			   // $locationProvider.html5Mode(true);

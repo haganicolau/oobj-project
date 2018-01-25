@@ -1,19 +1,23 @@
 /**
- * EController
+ * EmpresaController
  *
- * @description :: Server-side logic for managing ES
- * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
+ *
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ * @description :: Funções responsáveis por interagir com base de dados do modelo 
+ * Empresas. 
  */
 
+/*Dependências*/
 var ObjectId = require('bson-objectid');
 
 module.exports = {
-	
+	/*Método executado pela rota GET que obem a lista de empresas*/
 	index: (req, res) => {
-		/*verify if valid token*/
+
+		/*verifica se token válido*/
 		if(!authService.authenticateUserToken(req, res)) 
 			return res.status(203).json({status:'fail', message:'not allowed'});
-		
+		/*Obtém os dados do banco, se der tudo certo retorna sucesso, se der errado retorna a falha*/
 		Empresas.find()
 			
 			.then((response) => {
@@ -24,16 +28,23 @@ module.exports = {
 			});
 	},
 
+	/*Método executado pela rota POST para enviar os dados de empresa*/
 	create: (req, res) => {
+
+		/*verifica se token válido*/
 		if(!authService.authenticateUserToken(req, res)) 
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
+		/*Obtém os dados passado no corpo da requisição*/
 		let data = req.body;
+
+		/*Método usado para validar os dados do corpo da requicição*/
 		utilsEmpresasService.validateData(data, function(status, message){
 
 			if(!status)
 				return res.status(401).json({status:'fail', message:message});
 
+			/*Insere os dados*/
 			Empresas.create({
 				razao_social 	  : data.razao_social,
 				cnpj_base    	  : data.cnpj_base,
@@ -49,11 +60,14 @@ module.exports = {
 		});
 	},
 
+	/*Exclusão de empresas, porém, existe uma regra que após exclusão de uma empresa, todas as filiais devem ser descartadas também. */
 	delete: (req, res) => {
-		/*verify if valid token*/
+
+		/*verifica se token válido*/
 		if(!authService.authenticateUserToken(req, res)) 
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
+		/*Obtém o dado que será passado por parâmetro*/
 		let _id = req.param('id');
 
 		/*Exclusão de todas as filiais*/
@@ -77,13 +91,18 @@ module.exports = {
 	},
 
 	update: (req, res) => {
-		/*verify if valid token*/
+
+		/*verifica se token válido*/
 		if(!authService.authenticateUserToken(req, res)) 
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
+		/*Obtém o dado que será passado por parâmetro*/
 		let _id = req.param('id');
+
+		/*Obtém os dados passado no corpo da requisição*/
 		let data = req.body;
 
+		/*Alteração no banco*/
 		utilsEmpresasService.validateData(data, function(status, message){
 
 			if(!status)
@@ -106,11 +125,14 @@ module.exports = {
 		});
 	},
 
+	/*Busa de uma única empresa*/
 	findOne: (req, res) => {
-		/*verify if valid token*/
+
+		/*verifica se token válido*/
 		if(!authService.authenticateUserToken(req, res))
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
+		/*Obtém o dado que será passado por parâmetro*/
 		if(!req.param('id'))
 			return res.status(401).json({status:'fail', message:'_id is required'});
 

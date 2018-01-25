@@ -1,8 +1,8 @@
 /**
  * Filiais.js
  *
- * @description :: TODO: You might write a short summary of how this model works and what it represents here.
- * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ * @description :: TODO: Modelo que efetua o mapeamento ORM usando waterline
  */
 
 module.exports = {

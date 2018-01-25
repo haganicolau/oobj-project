@@ -30,7 +30,6 @@ angular.module('oobjclient')
                 if(item.id_estado === $scope.filial.estado.ID){
                     $scope.cidades = item.cidades;
                     $scope.filial.uf = $scope.filial.estado.Sigla;
-                    console.log($scope.filial);
                 }
             });
 

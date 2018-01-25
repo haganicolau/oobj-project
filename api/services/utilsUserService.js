@@ -1,9 +1,12 @@
 /**
  * utilsUserService
  *
- * @description :: 
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ * @description :: Serviços que validam os dados de usuário
  */
 
+
+/*Verifica se email já esta cadastrado*/
 function findUserByEmail(email, done){
 	Users.findOne({
 	'email': email
@@ -21,6 +24,7 @@ function findUserByEmail(email, done){
 	});
 }
 
+/*verifica se o email é válido*/
 function validateEmail(email){
 
 	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -28,6 +32,7 @@ function validateEmail(email){
 
 }
 
+/*valida os demais campos se são válidos*/
 module.exports = {
  	validateData:function(body, done){
 
@@ -55,6 +60,7 @@ module.exports = {
  		});
  	},
 
+ 	/*verfica se os dados de logins são válidos*/
  	validateDataLogin: function(email, password){
  		var messsage = '';
 
@@ -64,6 +70,7 @@ module.exports = {
 		return {status: true};
  	},
 
+ 	/*validate dados de alteração de senhas*/
  	validateDataPass:function(body, done){
 
  		if(!body.password || !body.confirm_password)

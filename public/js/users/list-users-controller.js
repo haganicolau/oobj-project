@@ -1,9 +1,15 @@
+/**
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ */
+
+/* Lista de usuários */
 angular.module('oobjclient')
 	.controller('ListaUsersController', function($scope, $http, $cookies, urlDominio, $window){
 		
 		let url = urlDominio.getUrl();
 		$scope.users ='';
 
+		/*característica da requisição*/
 		let req = {
 			method: 'GET',
 			url: url.concat('/users'),
@@ -14,6 +20,7 @@ angular.module('oobjclient')
 			}
 		}	
 
+		/*Resposta da requisição*/
 		$http(req).then(function(response){
 
 			$scope.users = response.data.body.response;

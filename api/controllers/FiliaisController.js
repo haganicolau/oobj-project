@@ -1,14 +1,16 @@
 /**
  * FiliaisController
  *
- * @description :: Server-side logic for managing filiais
- * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ * @description :: Funções responsáveis por interagir com base de dados do modelo filiais
  */
 
 module.exports = {
 	
+	/*Método executado pela rota GET que obem a lista de filiais*/
 	index: (req, res) => {
-		/*verify if valid token*/
+
+		/*verifica se token válido*/
 		if(!authService.authenticateUserToken(req, res)) 
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
@@ -22,17 +24,22 @@ module.exports = {
 			});
 	},
 
+	/*Método executado pela rota POST para enviar os dados de filiais*/
 	create: (req, res) => {
-		/*verify if valid token*/
+
+		/*verifica se token válido*/
 		if(!authService.authenticateUserToken(req, res)) 
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
+		/*Obtém o dado que será passado no corpo da requisição*/
 		let data = req.body;
 
+		/*valida se os dados a serem inseridos são válidos*/
 		utilsFiliaisService.validateData(data, function(status, message){
 			if(!status)
 				return res.status(401).json({status:'fail', message:message});
 
+			/*Pesquisa para ver se empresa existe, para ser vínculado a filial*/
 			Empresas.findById(data.empresa, function(err, response){
 
 				if(err)
@@ -63,11 +70,14 @@ module.exports = {
 		});
 	},
 
+	/*Função chamada pela rota de deleção de filiais*/
 	delete: (req, res) => {
-		/*verify if valid token*/
+
+		/*verifica se token válido*/
 		if(!authService.authenticateUserToken(req, res)) 
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
+		/*Obtém o dado que será passado por parâmetro*/
 		let _id = req.param('id');
 
 
@@ -84,14 +94,20 @@ module.exports = {
 
 	},
 
+	/*Função a ser chamada na rota de edição de filial. */
 	update: (req, res) => {
-		/*verify if valid token*/
+
+		/*verifica se token válido*/
 		if(!authService.authenticateUserToken(req, res)) 
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
+		/*Obtém o dado que será passado por parâmetro*/
 		let _id = req.param('id');
+
+		/*Obtém os dados passado no corpo da requisição*/
 		let data = req.body;
 
+		/*Valida se dados a serem alterados são válidos*/
 		utilsFiliaisService.validateData(data, function(status, message){
 
 			if(!status)
@@ -117,15 +133,19 @@ module.exports = {
 		});
 	},
 
+	/*Função que é executada no rota de busca de um registro específico*/
 	findOne: (req, res) => {
-		/*verify if valid token*/
+
+		/*verifica se token válido*/
 		if(!authService.authenticateUserToken(req, res))
 			return res.status(203).json({status:'fail', message:'not allowed'});
 
+		/*obtém o dado que foi passado por parâmetro na url*/
 		if(!req.param('id'))
 			return res.status(401).json({status:'fail', message:'_id is required'});
 
 
+		/*Pesquisa e envia o dado achado*/
 		Filiais.findById(req.param('_id'), function(err, response){
 
 			if(err)

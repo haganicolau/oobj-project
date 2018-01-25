@@ -1,3 +1,9 @@
+/**
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ */
+
+/* rotas de filiais
+ */
 angular.module('oobjclient')
 	.config(function($routeProvider){
 			   // $locationProvider.html5Mode(true);

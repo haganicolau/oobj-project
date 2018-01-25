@@ -1,17 +1,21 @@
 /**
  * authService
  *
- * @description :: 
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ * @description :: Funções responsáveis garantir a integridade e autencidade do acesso 
+ * a solução
  */
- 
+
+/*Dependências*/
 var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 var shortid = require('shortid');
 
-// this would need to live in sails config
+/*Chave secreta*/
 var jwtSecret = 'xStmbyc066BOFn40gIr29y09Ud94z1P7';
 
+/*Função que gera um hash para criptografia*/
 function hash(value, salt, done) {
     salt = salt || bcrypt.genSaltSync();
 
@@ -24,6 +28,7 @@ function hash(value, salt, done) {
 
 module.exports = {
 
+    /*Usuário ao logar, vai usar esta função para gerar um novo token*/
     generateUserToken: function (user, done) {
         var issueDate = moment().utc().format(),
         encodedToken = null;
@@ -40,6 +45,7 @@ module.exports = {
         });
     },
 
+    /*Toda vez que o usuário fazer uma requisição a API, o token deverá ser validado*/
     authenticateUserToken: function (req, res) {
 
       var issueDate = req.headers["x-token-issued"];
@@ -52,9 +58,10 @@ module.exports = {
       var issued = moment.utc(issueDate),
           tokenObj = null;
 
-      /* check the issue date to see if the token has expired (quick way to kick out expired tokens)
-      * to check accurately for minutes we need to check in seconds as moment rounds the result down 
-      * to the nearest unit
+      /* verifique a data do problema para ver se o token expirou (maneira 
+      *  rápida de expulsar os toques expirados) para verificar com precisão 
+      *  os minutos que precisamos verificar em segundos, pois o momento arredonda 
+      *  o resultado para a unidade mais próxima
       */
       if (moment.utc().diff(issued, 'seconds') > 36000) {
           return false;
@@ -66,7 +73,9 @@ module.exports = {
           return false;
       }
 
-      /*validate that the issueDate passed in matches the issue date the token was created with*/
+      /*valide que o issueDate passou nas correspondências da data de emissão em que o 
+      * token foi criado com
+      */
       if (tokenObj.issued !== issueDate) {
           return false;
       }

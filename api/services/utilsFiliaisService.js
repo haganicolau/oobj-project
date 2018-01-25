@@ -1,10 +1,12 @@
 /**
  * utilsFiliaisService
  *
- * @description :: 
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ * @description :: valida os dados de filial
  */
  
 
+/*verifica se cnpj é válido*/
  function validateCNPJ(cnpj){
 	cnpj = cnpj.replace(/[^\d]+/g,'');
  
@@ -57,6 +59,7 @@
     return true;
 }
 
+/*Verifica se dados são válidos*/
 module.exports = {
  	validateData:function(body, done){
 

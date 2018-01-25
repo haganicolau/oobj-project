@@ -31,6 +31,8 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
+  
+  /*Verificar documentão das rotas do WEB Service entregues junto com o projeto.*/
   /*
   *User routes
   */

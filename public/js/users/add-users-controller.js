@@ -1,9 +1,15 @@
+/**
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ */
+
+/* Controller para cadatro de usuário. 
+ */
 angular.module('oobjclient')
 	.controller('AddUsersController', function($scope, $modal, $http, $cookies, urlDominio, $window){
 
 		$scope.user = {};
 
-        /*chama o modal para cadastro de empresa*/
+        /*chama o modal para cadastro de usuario*/
         $scope.showFormAdd = function(){
 
             var modalInstance = $modal.open({
@@ -19,15 +25,18 @@ angular.module('oobjclient')
         };
 });
 
+/*Modal de cadastro de usuário*/
 var ModalInstanceUser = function ($scope, $http, $modalInstance, userForm,urlDominio, $cookies) {
     $scope.mensagem_success='';
 
 	$scope.submitFormSaveUser = function(){
+        /*spin ativado*/
 		$scope.loading=true;
 		$scope.mensagem_error='';
 
 		var valid = true;
 
+        /*valida as informações*/
 		if(!userForm.name){
             $scope.mensagem_error='Informe Nome';
             valid = false;
@@ -56,6 +65,7 @@ var ModalInstanceUser = function ($scope, $http, $modalInstance, userForm,urlDom
         if(valid){
         	var url = urlDominio.getUrl();
 
+            /*caracteristicas da requisição*/
         	var req = {
                 method: 'POST',
                 url: url.concat('/users'),
@@ -66,6 +76,7 @@ var ModalInstanceUser = function ($scope, $http, $modalInstance, userForm,urlDom
 					"x-token-issued" : $cookies.get('x-token-issued')
                 }
             };
+            /*envio requisição*/
             $http(req).then(function(data){
 
             	user = data.data.body.data;
@@ -80,6 +91,7 @@ var ModalInstanceUser = function ($scope, $http, $modalInstance, userForm,urlDom
                 $scope.mensagem_error=erro.data.message;
             })
         } else{
+            /*desativa o spin*/
             $scope.loading=false;
         }
 	}

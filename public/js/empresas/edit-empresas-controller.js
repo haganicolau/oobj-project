@@ -1,9 +1,18 @@
+/**
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ */
+
+  /*controlador para editar empresa*/
 angular.module('oobjclient')
     .controller('EditEmpresasController', function($scope, $modal, $http, $cookies, urlDominio, $window){
 
+        /* Canal entre controlloers diferentes recebe o dado da empresa a partir do 
+         * controller da lista de empresas
+         */
         $scope.$on('modalEditEmpresa', function(event, mass) { 
             $scope.empresa = mass;
             
+            /*chama o modal para edição de empresa*/
             var modalInstance = $modal.open({
                 templateUrl: '/views/empresas/edit-empresa.html',
                 controller: ModalInstanceEditEmpresa,
@@ -17,6 +26,7 @@ angular.module('oobjclient')
         });
 });
 
+/*Gera o formulário de edite empresa*/
 var ModalInstanceEditEmpresa = function ($scope, $http, $modalInstance, empresaForm, urlDominio, $cookies) {
     $scope.mensagem_success='';
 
@@ -26,6 +36,7 @@ var ModalInstanceEditEmpresa = function ($scope, $http, $modalInstance, empresaF
 
         var valid = true;
 
+        /*valida os dados*/
         if(!empresaForm.razao_social){
             $scope.mensagem_error='Informe Razão Social';
             valid = false;
@@ -44,6 +55,7 @@ var ModalInstanceEditEmpresa = function ($scope, $http, $modalInstance, empresaF
         if(valid){
             var url = urlDominio.getUrl();
 
+            /*características da requisição*/
             var req = {
                 method: 'PUT',
                 url: url.concat('/empresas'),
@@ -56,6 +68,7 @@ var ModalInstanceEditEmpresa = function ($scope, $http, $modalInstance, empresaF
                 }
             };
 
+            /*Respostas da requisição*/
             $http(req).then(function(data){
 
                 $scope.mensagem_success = "Alterações realizadas com sucesso";
@@ -69,9 +82,13 @@ var ModalInstanceEditEmpresa = function ($scope, $http, $modalInstance, empresaF
                 $scope.loading=false;
                 $scope.mensagem_error=erro.data.message;
             })
+        } else{
+            $scope.loading=false;
+
         }
     }
-
+    
+    /*fecha o modal*/
     $scope.cancel = function () {
         $modalInstance.close('cancel');
     };

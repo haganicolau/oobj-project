@@ -1,7 +1,7 @@
 <header id="topnav">
 	<div ng-include="'/views/common/topbar.html'"></div>
 </header>
-	<div class="container">
+	<div class="container-fluid">
 
 		<div class="row">
 
@@ -46,7 +46,7 @@
 				</div>
 			</section>
 
-			<section class='col-sm-8'>
+			<section class='col-sm-9'>
 
 				<h3>{{empresa.razao_social}}</h3>
 
@@ -81,6 +81,8 @@
 				      <th class="">UF</th>
 				      <th class="">Status</th>
 				      <th class="">Categoria</th>
+				      <th class="">Cadastro</th>
+				      <th class="">Últimas Alteração</th>
 				      <th class="">Ações</th>
 				    </tr>
 				  </thead>
@@ -96,6 +98,8 @@
 				      <td>{{filial.uf}}</td>
 					  <td>{{filial.status}}</td>
 					  <td>{{filial.categoria}}</td>
+  				      <td>{{filial.createdAt | amDateFormat: "DD/mm/YYYY"}}</td>
+				      <td>{{filial.updatedAt | amDateFormat: "DD/mm/YYYY"}}</td>
 				      <td>
 				      	<div class="row">
 

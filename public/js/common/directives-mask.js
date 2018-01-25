@@ -1,5 +1,10 @@
+/**
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ */
+ 
 angular.module("oobjclient").directive("phoneDir", PhoneDir);
 
+/*Diretivas para criação de mascaras de telefone*/
 function PhoneDir() {
   return {
     link : function(scope, element, attrs) {
@@ -25,8 +30,8 @@ function PhoneDir() {
   }
 };
 
+/*Diretivas para criação de mascaras de cnpj*/
 angular.module("oobjclient").directive("cnpjDir", CnpjDir);
-
 function CnpjDir() {
    return {
     link : function(scope, element, attrs) {
@@ -49,8 +54,8 @@ function CnpjDir() {
   }
 }
 
+/*Diretivas para criação de mascaras de base cnpj*/
 angular.module("oobjclient").directive("cnpjBaseDir", CnpjBaseDir);
-
 function CnpjBaseDir() {
    return {
     link : function(scope, element, attrs) {
@@ -73,6 +78,7 @@ function CnpjBaseDir() {
   }
 }
 
+/*Diretivas para criação de mascaras de data*/
 angular.module("oobjclient").directive("birthDir", BirthDir);
 
 function BirthDir() {

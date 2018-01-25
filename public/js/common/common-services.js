@@ -1,3 +1,10 @@
+/**
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ */
+
+/* Serviço responsável por manter em um único lugar a url da aplicação servidor, desta 
+ * forma para ambientes variádos como produção, teste, basta apenar mudar esta url.
+ */
 angular.module('oobjclient')
 	.service('urlDominio', function($http){
 		this.getUrl = function(){
@@ -5,6 +12,7 @@ angular.module('oobjclient')
 		}
 	});
 
+/*Validar CNPJ do lado do cliente*/
 angular.module('oobjclient')
 .service('validateCNPJ', function($http){
 	this.validarCNPJ = function(cnpj){

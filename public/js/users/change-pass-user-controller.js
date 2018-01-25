@@ -1,9 +1,15 @@
+/**
+ * @author: Hagamenon Nicolau <haganicolau@gmail.com>
+ */
+
+/* Controlador criado para gerenciar a mudança de senhas.
+ */
 angular.module('oobjclient')
 	.controller('ChangePassUserController', function($scope, $modal, $http, $cookies, urlDominio, $window){
 
 		$scope.user = {};
 
-        /*chama o modal para cadastro de empresa*/
+        /*chama o modal para alteração de senhas*/
         $scope.showModelPass = function(){
 
             var modalInstance = $modal.open({
@@ -19,15 +25,18 @@ angular.module('oobjclient')
         };
 });
 
+/*Modal*/
 var ModalInstancePass = function ($scope, $timeout, $http, $modalInstance, userForm,urlDominio, $cookies) {
     $scope.mensagem_success='';
 
 	$scope.submitFormSaveUser = function(){
-		$scope.loading=true;
+		/*ativa o spin*/
+        $scope.loading=true;
 		$scope.mensagem_error='';
 
 		var valid = true;
 
+        /*valida se as informações estão ok*/
 		if(!userForm.password){
             $scope.mensagem_error='Informe Password';
             valid = false;
@@ -46,6 +55,7 @@ var ModalInstancePass = function ($scope, $timeout, $http, $modalInstance, userF
         if(valid){
         	var url = urlDominio.getUrl();
 
+            /*característica da requisição*/
         	var req = {
                 method: 'PUT',
                 url: url.concat('/editPass'),
@@ -57,11 +67,11 @@ var ModalInstancePass = function ($scope, $timeout, $http, $modalInstance, userF
 					"x-token-issued" : $cookies.get('x-token-issued')
                 }
             };
+            /*Envio da requisição*/
             $http(req).then(function(data){
 
                 $scope.mensagem_success = "Mudança realizada com sucesso";
                 $scope.loading=false;
-                // $timeout($modalInstance.close('cancel'), 4000);
                 $scope.user = {};
 
             })
@@ -70,6 +80,7 @@ var ModalInstancePass = function ($scope, $timeout, $http, $modalInstance, userF
                 $scope.mensagem_error=erro.data.message;
             })
         } else{
+            /*desativa o spin*/
             $scope.loading=false;
         }
 	}
