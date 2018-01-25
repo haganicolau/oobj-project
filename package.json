@@ -33,6 +33,9 @@
     "sails-mongo": "^0.12.3",
     "shortid": "~2.0.0"
   },
+  "engines":{
+    "node": "8.9.4"
+  },
   "scripts": {
     "start": "sails lift",
     "debug": "node debug app.js"
