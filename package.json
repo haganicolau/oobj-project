@@ -1,7 +1,7 @@
 {
   "name": "oobj-project",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
@@ -25,7 +25,7 @@
     "is-empty": "^1.2.0",
     "jwt-simple": "~0.1.0",
     "md5": "^2.2.1",
-    "moment": "^2.5.1",
+    "moment": "^2.20.1",
     "nodemailer": "^4.4.2",
     "rc": "1.0.1",
     "sails": "~0.12.14",
@@ -34,8 +34,8 @@
     "shortid": "~2.0.0"
   },
   "scripts": {
-    "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "sails lift",
+    "debug": "node debug app.js"
   },
   "main": "app.js",
   "repository": {
