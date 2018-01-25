@@ -2,7 +2,7 @@
     X
 </button>
 <div class="modal-header">
-    <h3>Cadastro Empresa</h3>
+    <h3>Editar Filial</h3>
 </div>
 <form name="filial.filialForm" ng-submit="submitFormEditFilial()" novalidate>
     <div class="modal-body">
@@ -17,22 +17,28 @@
                     <input type="hidden" name="id" value="{{filial.id}}" ng-model="filial.id" />
                 </div>
             </div>
+
             <div class="col-md-3">
                 <div class="form-group">
                     <label>UF</label>
-                    <input type="text" name="uf" ng-model="filial.uf" class="form-control" required >
 
+                    <select class="form-control" ng-model="filial.estado" 
+                            ng-options="state.Sigla for state in estados"
+                            ng-change="updateCity()">
+                            <option value="">Selecione</option>
+                    </select>
                 </div>
             </div>
-
             <div class="col-md-9">
                 <div class="form-group">
                     <label>Município</label>
-                    <input type="text" name="municipio" ng-model="filial.municipio" class="form-control" required >
+                    <select class="form-control" ng-model="filial.municipio" 
+                            ng-options="city for city in cidades">
+                            <option value="">Selecione</option>
+                    </select>
                 </div>
             </div>
-        </div>
-        <div class="row">
+
             <div class="col-md-6">
                 <label>Status</label>
                 <select name="status" ng-model="filial.status" class="form-control selectpicker">

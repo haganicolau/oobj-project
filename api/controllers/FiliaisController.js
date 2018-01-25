@@ -111,7 +111,7 @@ module.exports = {
 				return res.status(202).json({status:'success', body:null});
 			})
 			.catch((err)=>{
-				return res.status(401).json({status:'fail', messsage:err});
+				return res.status(401).json({status:'fail', message:err});
 			});
 
 		});

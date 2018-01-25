@@ -47,7 +47,7 @@ var ModalInstancePass = function ($scope, $timeout, $http, $modalInstance, userF
         	var url = urlDominio.getUrl();
 
         	var req = {
-                method: 'POST',
+                method: 'PUT',
                 url: url.concat('/editPass'),
                 data: userForm,
                 param: {id: $cookies.get('x-user')},

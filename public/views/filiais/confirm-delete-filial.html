@@ -9,8 +9,12 @@
 <div class="modal-body" >
 
     <h4>Confirme!</h4>
-    <div class="alert alert-info">
+    <div ng-show="!validForm()"  class="alert alert-info">
     	<p><strong>Você tem certeza que deseja excluir esta Filial? Está ação será permanente.</strong></p>
+    </div>
+
+    <div ng-show="mensagem_warn.length"  class="alert alert-warning">
+        <p><strong>{{mensagem_warn}}</strong></p>
     </div>
 
 
@@ -23,7 +27,7 @@
 
     <div class="modal-footer">
         <form name="filial.filialDeleteForm" ng-submit="confirmRemoveFilial(id)" novalidate>
-            <button ladda="loading" type="submit" class="btn btn-primary waves-effect waves-light" >Confirmar</button>
+            <button ng-disabled="validForm()" ladda="loading" type="submit" class="btn btn-primary waves-effect waves-light" >Confirmar</button>
             <button class="btn btn-warning waves-effect waves-light" ng-click="cancel()">Cancelar</button>       
         </form>
      </div>

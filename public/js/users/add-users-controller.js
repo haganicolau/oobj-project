@@ -67,12 +67,13 @@ var ModalInstanceUser = function ($scope, $http, $modalInstance, userForm,urlDom
                 }
             };
             $http(req).then(function(data){
-                console.log(data);
+
             	user = data.data.body.data;
                 $scope.mensagem_success = "Cadastro realizado com sucesso";
                 $scope.loading=false;
                 $scope.user = {};
                 $scope.$emit('update_list_user', user);
+                $modalInstance.close('cancel');
             })
             .catch(function(erro){
                 $scope.loading=false;

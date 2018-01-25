@@ -53,7 +53,7 @@ module.exports.routes = {
     action: "create"
   },
 
-  'POST /api/v1/editPass' : {
+  'PUT /api/v1/editPass' : {
     controller: "UsersController", 
     action: "editPass"
   },

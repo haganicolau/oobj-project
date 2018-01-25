@@ -1,7 +1,11 @@
 angular.module('oobjclient')
-	.controller('AddFiliaisController', function($scope, $modal, $http, $cookies, urlDominio, $window){
+	.controller('AddFiliaisController', function($scope, CityState, $modal, $http, $cookies, urlDominio, $window){
 
+        var reader = new FileReader();
 		$scope.filial = {};
+        $scope.cidades = [];
+        $scope.estados = CityState.getState();
+
 		$scope.id = 0;
 
         /*chama o modal para cadastro de empresa*/
@@ -18,6 +22,18 @@ angular.module('oobjclient')
                     }
                 }
             });
+        };
+
+        $scope.updateCity = function(){
+            
+            CityState.getCity().forEach(function(item, index, array){
+                if(item.id_estado === $scope.filial.estado.ID){
+                    $scope.cidades = item.cidades;
+                    $scope.filial.uf = $scope.filial.estado.Sigla;
+                    console.log($scope.filial);
+                }
+            });
+
         };
 });
 

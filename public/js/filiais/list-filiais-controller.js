@@ -1,5 +1,5 @@
 angular.module('oobjclient')
-    .controller('ListFiliaisController', function($scope, $routeParams, $modal, $http, $cookies, urlDominio, $window){
+    .controller('ListFiliaisController', function($scope, CityState, $routeParams, $modal, $http, $cookies, urlDominio, $window){
 
         $scope.filiais = [];
         $scope.empresa = {};
@@ -10,7 +10,7 @@ angular.module('oobjclient')
         let url = urlDominio.getUrl();
 
         /*Popular lista de filiais*/
-        let req = {
+        let req_filial = {
             method: 'GET',
             url: url.concat('/filiais'),
             params: {empresa: id_empresa},
@@ -21,15 +21,16 @@ angular.module('oobjclient')
             }
         }
 
-        $http(req).then(function(response){
+        $http(req_filial).then(function(response){
             $scope.filiais = response.data.body.response;
+            
                 
         }).catch(function(erro){
             $scope.mensagem_error='Houve um erro ao carregar a lista, tente novamente!';
         }); 
 
         /*popular registro de empresa*/  
-        let req2 = {
+        let req_empresa = {
             method: 'GET',
             url: url.concat('/empresas/findOne'),
             params: {id: id_empresa},
@@ -40,7 +41,7 @@ angular.module('oobjclient')
             }
         }
 
-        $http(req2).then(function(response){
+        $http(req_empresa).then(function(response){
             $scope.empresa = response.data.body.response;
                 
         }).catch(function(erro){
@@ -53,7 +54,7 @@ angular.module('oobjclient')
         });
 
         $scope.showFormDelete = function(id){
-            $scope.$broadcast('modalConfirmExclusaoFilial', id);
+            $scope.$broadcast('modalConfirmExclusaoFilial', {id:id, length: $scope.filiais.length});
         }
 
         $scope.$on('remove_list_filial', function(event, mass) { 

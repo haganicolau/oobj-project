@@ -1,8 +1,24 @@
 angular.module('oobjclient')
-    .controller('EditFiliaisController', function($scope, $modal, $http, $cookies, urlDominio, $window){
+    .controller('EditFiliaisController', function($scope, CityState, $modal, $http, $cookies, urlDominio, $window){
 
         $scope.$on('modalEditFilial', function(event, mass) { 
             $scope.filial = mass;
+
+            $scope.cidades = [];
+            $scope.estados = CityState.getState();
+
+            $scope.estados.forEach(function(item, index, array){
+                if(item.Sigla === mass.uf){
+                    $scope.filial.estado = item;
+
+                    CityState.getCity().forEach(function(it, idx, arr){
+
+                        if(it.id_estado === $scope.filial.estado.ID){
+                            $scope.cidades = it.cidades;
+                        } 
+                    });
+                } 
+            });
             
             var modalInstance = $modal.open({
                 templateUrl: '/views/filiais/edit-filial.html',
@@ -15,6 +31,16 @@ angular.module('oobjclient')
                 }
             });
         });
+
+        $scope.updateCity = function(){
+            CityState.getCity().forEach(function(item, index, array){
+                if(item.id_estado === $scope.filial.estado.ID){
+                    $scope.cidades = item.cidades;
+                    $scope.filial.uf = $scope.filial.estado.Sigla;
+                }
+            });
+
+        };
 });
 
 var ModalInstanceEditFilial = function ($scope, $http, $modalInstance, validateCNPJ, filialForm, urlDominio, $cookies) {
@@ -83,8 +109,10 @@ var ModalInstanceEditFilial = function ($scope, $http, $modalInstance, validateC
             })
             .catch(function(erro){
                 $scope.loading=false;
-                $scope.mensagem_error=erro.data.message;
+                $scope.mensagem_error="Alteração não concluída! Tente novamente.";
             })
+        } else{
+             $scope.loading=false;
         }
     }
 

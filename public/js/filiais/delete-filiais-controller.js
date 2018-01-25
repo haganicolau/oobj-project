@@ -2,7 +2,8 @@ angular.module('oobjclient')
 	.controller('DeleteFiliaisController', function($scope, $modal, $http, $cookies, urlDominio, $window){
 
         $scope.$on('modalConfirmExclusaoFilial', function(event, mass) { 
-            $scope.id = mass;
+            $scope.id = mass.id;
+            $scope.length = mass.length;
             
             var modalInstance = $modal.open({
                 templateUrl: '/views/filiais/confirm-delete-filial.html',
@@ -15,6 +16,17 @@ angular.module('oobjclient')
                 }
             });
         });
+
+       $scope.validForm = function(){
+
+            if($scope.length ===1){
+                $scope.mensagem_warn = "Não pode excluir Filial, empresa deve ter ao menos uma filial cadastrada.";
+                return true;
+            } else{
+                $scope.mensagem_warn = '';
+                return false;
+            }
+        }
 });
 
 var ModalInstanceRemoveFilial = function ($scope, $http, $modalInstance, filialDeleteForm,urlDominio, $cookies) {
@@ -24,6 +36,8 @@ var ModalInstanceRemoveFilial = function ($scope, $http, $modalInstance, filialD
        $scope.mensagem_error='';
 	   $scope.mensagem_success='';
        var url = urlDominio.getUrl();
+
+
 
        var req = {
                 method: 'DELETE',
@@ -42,10 +56,10 @@ var ModalInstanceRemoveFilial = function ($scope, $http, $modalInstance, filialD
 
             	$scope.$emit('remove_list_filial', id);
                 $modalInstance.close('cancel');
-            })
-            .catch(function(erro){
+           
+            }).catch(function(erro){
                 $scope.loading=false;
-                $scope.mensagem_error=erro.data.message;;
+                $scope.mensagem_error=erro.data.message;
             })
     };
 
